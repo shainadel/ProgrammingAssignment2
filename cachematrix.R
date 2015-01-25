@@ -6,12 +6,12 @@ makeCacheMatrix <- function(x = matrix())
 	ValInverseCache <- NULL
 	set <- function(InVal) 
 	{
-		Val <<- InVal
+		x <<- InVal
 		ValInverseCache <<- NULL
 	}
 	get <- function() 
 	{
-		Val
+		x
 	}
 	setinverse <- function(inv_) 
 	{
@@ -31,14 +31,14 @@ makeCacheMatrix <- function(x = matrix())
 
 cacheSolve <- function(x, ...) 
 {
-	ValInverse <- Val$getinverse()
+	ValInverse <- x$getinverse()
 	if(is.null(ValInverse)) 
 	{
 		data <- x$get()
 		ValInverse <- solve(data, ...)
-		Val$setinverse(ValInverse)
+		x$setinverse(ValInverse)
 	} 
 	else
-		message("Using cached data")
+		message("cached data used")
 	return(ValInverse)
 }
